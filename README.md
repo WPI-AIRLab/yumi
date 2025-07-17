@@ -53,15 +53,15 @@
 	```
 - Compile industrial_core
 	```
-	$ cd $HOME/catkin_ws
+	cd $HOME/catkin_ws
 
-	$ git clone -b melodic-devel https://github.com/ros-industrial/industrial_core.git src/industrial_core
+	git clone -b melodic-devel https://github.com/ros-industrial/industrial_core.git src/industrial_core
 
-	$ rosdep update
+	rosdep update
 
-	$ rosdep install --from-paths src/ --ignore-src --rosdistro noetic
+	rosdep install --from-paths src/ --ignore-src --rosdistro noetic
 
-	$ catkin build
+	catkin build
 	```
 - If you encounter Gazebo error:
 	```
@@ -72,3 +72,17 @@
     Change `<param name="robot_description" command="$(find xacro)/xacro.py` to `<param name="robot_description" command="$(find xacro)/xacro`
 
     Reference: （[ROSの勉強　第23弾：チェスセットのモデル作成](https://qiita.com/Yuya-Shimizu/items/f1a22d430a3f6343b3e7)）
+
+## Moving the Robot
+
+Controlling the robot is primarily done through **actionlib**, and an example script showing how to control it thorugh rospy can be found in **example_script/bimanual_move**. To test this out for youself, first launch the **rws_gazebo.launch** file in the yumi_launch files in one terminal, and run the **bimanual_move** script in another.
+
+First, launch rws_gazebo
+```
+roslaunch yumi_launch rws_gazebo.launch
+```
+
+Next, run bimanual_move
+```
+python src/yumi/example_script/bimanual_move.py
+```
