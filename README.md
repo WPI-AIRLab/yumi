@@ -31,34 +31,22 @@
 	        ros-$ROS_DISTRO-position-controllers \
 	        ros-$ROS_DISTRO-rqt-joint-trajectory-controller \
 	        ros-$ROS_DISTRO-transmission-interface \
-	        ros-$ROS_DISTRO-velocity-controllers 
+	        ros-$ROS_DISTRO-velocity-controllers \
+			ros-$ROS_DISTRO-hector-xacro-tools
 
 	pip3 install --user pyftpdlib
 	pip3 install --user --upgrade pyassimp
 
-	sudo apt install ros-$ROS_DISTRO-hector-xacro-tools
 	```
 
-- Compile abb_driver
-	```
-	cd $HOME/catkin_ws
-
-	git clone -b melodic-devel https://github.com/ros-industrial/abb_driver.git src/abb_driver
-
-	rosdep update
-
-	rosdep install --from-paths src/ --ignore-src --rosdistro noetic
-
-	catkin build
-	```
-- Compile industrial_core
+- Clone and Compile Required Pacakges (abb_driver and industrial_core)
 	```
 	cd $HOME/catkin_ws
 
-	git clone -b melodic-devel https://github.com/ros-industrial/industrial_core.git src/industrial_core
+	git clone -b melodic-devel https://github.com/WPI-AIRLab/abb_driver.git src/abb_driver
+	git clone -b melodic-devel https://github.com/WPI-AIRLab/industrial_core.git src/industrial_core
 
 	rosdep update
-
 	rosdep install --from-paths src/ --ignore-src --rosdistro noetic
 
 	catkin build
@@ -73,7 +61,7 @@
 
     Reference: （[ROSの勉強　第23弾：チェスセットのモデル作成](https://qiita.com/Yuya-Shimizu/items/f1a22d430a3f6343b3e7)）
 
-## Moving the Robot
+## Moving the Simulated Robot
 
 Controlling the robot is primarily done through **actionlib**, and an example script showing how to control it thorugh rospy can be found in **example_script/bimanual_move**. To test this out for youself, first launch the **rws_gazebo.launch** file in the yumi_launch files in one terminal, and run the **bimanual_move** script in another.
 
@@ -86,3 +74,10 @@ Next, run bimanual_move
 ```
 python src/yumi/example_script/bimanual_move.py
 ```
+
+### Moving the Real Robot
+If you wish to run the Real Yumi, follow the Simulated Robot steps except launch the **rws_online.launch** file instead of the **rws_gazebo.launch** file. 
+```
+roslaunch yumi_launch rws_online.launch
+```
+
