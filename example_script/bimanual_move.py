@@ -43,7 +43,7 @@ if __name__ == '__main__':
         # Create a trajectory point with the desired joint values
         point = JointTrajectoryPoint()
         point.positions = jointPos
-        point.time_from_start = rospy.Duration(4)
+        point.time_from_start = rospy.Duration(1)
         
         # Add the point to the trajectory
         goal.trajectory.points.append(point)
